@@ -6,7 +6,7 @@ async function fetchAddonsFromReleases() {
     let api = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/releases`;
     try {
         const res = await fetch(api);
-        if (!res.ok) throw new Error("Failed to fetch from GitHub Releases");
+        if (!res.ok) throw new Error("Gagal fetch dari GitHub Releases");
         const releases = await res.json();
         let githubAddons = [];
         for (const release of releases) {
