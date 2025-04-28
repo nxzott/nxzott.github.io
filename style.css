@@ -1,30 +1,159 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap');
+
+:root {
+    --primary: #5568FE;
+    --accent: #43B781;
+    --bg: #181A1B;
+    --surface: #222426;
+    --surface2: #242629;
+    --grey: #B0B3B8;
+    --shadow: 0 4px 18px rgba(0,0,0,0.25);
+    --header-height: 56px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
 body {
-    background: #181A1B;
-    font-family: Arial, sans-serif;
+    background: var(--bg);
+    color: #E0E0E0;
+    font-family: 'Roboto', Arial, sans-serif;
     margin: 0;
     padding: 0;
-    color: #E0E0E0;
 }
 
-.container {
-    background: #222426;
-    max-width: 500px;
-    margin: 40px auto;
-    box-shadow: 0 4px 18px rgba(0,0,0,0.30);
-    border-radius: 10px;
-    padding: 32px 24px;
+.main-header {
+    height: var(--header-height);
+    background: var(--surface2);
+    box-shadow: 0 2px 8px #1119;
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
-h1 {
-    text-align: center;
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 12px;
+}
+
+.menu-btn {
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    color: #fff;
+    padding: 6px;
+    border-radius: 50%;
+    font-size: 1.7rem;
+    transition: background 0.2s;
+}
+.menu-btn:hover {
+    background: #31343c;
+}
+
+.header-icon {
+    width: 36px;
+    height: 36px;
+    margin-right: 6px;
+}
+
+.header-title {
+    font-size: 1.45rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
     color: #F1F1F3;
-    letter-spacing: 1px;
+    user-select: none;
 }
 
-p {
+.side-nav {
+    width: 250px;
+    background: var(--surface);
+    position: fixed;
+    left: -260px;
+    top: 0;
+    height: 100vh;
+    z-index: 200;
+    box-shadow: var(--shadow);
+    transition: left 0.3s cubic-bezier(.4,0,.2,1);
+    display: flex;
+    flex-direction: column;
+}
+
+.side-nav.open {
+    left: 0;
+}
+.overlay {
+    position: fixed;
+    z-index: 110;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(20,20,22,0.42);
+    display: none;
+    transition: opacity 0.2s;
+}
+.overlay.active {
+    display: block;
+}
+
+.nav-content {
+    padding: 28px 18px;
+}
+.nav-title {
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 1.12em;
+    margin-bottom: 18px;
+}
+.side-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.side-nav li {
+    margin-bottom: 13px;
+}
+.side-nav a {
+    color: #E0E0E0;
+    text-decoration: none;
+    font-size: 1.05em;
+    padding: 7px 10px;
+    border-radius: 4px;
+    display: block;
+    transition: background 0.15s;
+}
+.side-nav a:hover {
+    background: var(--primary);
+    color: #fff;
+}
+
+main {
+    max-width: 540px;
+    margin: 32px auto;
+    background: var(--surface);
+    border-radius: 14px;
+    padding: 30px 22px 24px 22px;
+    box-shadow: var(--shadow);
+}
+
+.intro {
     text-align: center;
-    color: #B0B3B8;
-    font-size: 1rem;
+    margin-bottom: 22px;
+}
+.intro h1 {
+    margin: 0 0 6px 0;
+    font-weight: 600;
+    color: #F1F1F3;
+    font-size: 2rem;
+    letter-spacing: 0.02em;
+}
+.intro p {
+    color: var(--grey);
+    font-size: 1.08rem;
+    margin: 0;
 }
 
 .addon-actions {
@@ -35,75 +164,37 @@ p {
 
 #search {
     flex: 1;
-    padding: 8px;
-    border-radius: 3px;
+    padding: 10px 12px;
+    border-radius: 4px;
     border: 1px solid #343739;
-    background: #242629;
+    background: var(--surface2);
     color: #E0E0E0;
-}
-
-#toggle-upload {
-    padding: 8px 16px;
-    background: #5568FE;
-    color: #fff;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-#toggle-upload:hover {
-    background: #3242a8;
-}
-
-#upload-form {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-bottom: 18px;
-    margin-top: 8px;
-}
-
-#upload-form input[type="text"],
-#upload-form input[type="url"] {
-    padding: 8px;
-    border-radius: 3px;
-    border: 1px solid #343739;
-    background: #23272A;
-    color: #E0E0E0;
-}
-
-#upload-form button {
-    background: #43B781;
-    color: #fff;
-    border: none;
-    border-radius: 3px;
-    padding: 8px 0;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-#upload-form button:hover {
-    background: #297055;
+    font-size: 1.05em;
 }
 
 #addon-list {
     list-style: none;
     padding: 0;
-    margin-top: 16px;
+    margin-top: 12px;
 }
 
 #addon-list li {
-    background: #242629;
+    background: var(--surface2);
     border: 1px solid #2E3135;
-    border-radius: 5px;
-    margin-bottom: 14px;
-    padding: 16px;
+    border-radius: 7px;
+    margin-bottom: 16px;
+    padding: 18px 16px 14px 16px;
     display: flex;
     flex-direction: column;
     gap: 8px;
     position: relative;
-    box-shadow: 0 1px 6px rgba(30,30,40,0.15);
+    box-shadow: 0 1px 7px rgba(30,30,40,0.12);
+    animation: fadeIn 0.4s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px);}
+    to { opacity: 1; transform: translateY(0);}
 }
 
 .addon-header {
@@ -115,12 +206,12 @@ p {
 .addon-name {
     font-weight: 600;
     color: #F1F1F3;
-    font-size: 1.07em;
+    font-size: 1.09em;
 }
 
 .addon-desc {
-    color: #B0B3B8;
-    font-size: 0.98rem;
+    color: var(--grey);
+    font-size: 0.99rem;
     margin-bottom: 8px;
 }
 
@@ -130,41 +221,56 @@ p {
 }
 
 .addon-link {
-    background: #5568FE;
+    background: var(--primary);
     color: #fff;
-    padding: 7px 16px;
+    padding: 7px 18px;
     border: none;
-    border-radius: 3px;
+    border-radius: 4px;
     text-decoration: none;
-    font-size: 0.93rem;
+    font-size: 0.98rem;
     transition: background 0.2s;
+    font-weight: 500;
 }
-
 .addon-link:hover {
     background: #3242a8;
 }
 
 .copy-btn {
-    background: #43B781;
+    background: var(--accent);
     color: #fff;
     padding: 7px 14px;
     border: none;
-    border-radius: 3px;
+    border-radius: 4px;
     cursor: pointer;
-    font-size: 0.93rem;
+    font-size: 0.98rem;
     transition: background 0.2s;
+    font-weight: 500;
 }
-
 .copy-btn:hover {
     background: #297055;
 }
 
-/* Scrollbar styling for dark theme */
 ::-webkit-scrollbar {
     width: 10px;
-    background: #222426;
+    background: var(--surface);
 }
 ::-webkit-scrollbar-thumb {
     background: #2E3135;
     border-radius: 5px;
+}
+
+/* Responsive: mobile */
+@media (max-width: 700px) {
+    main {
+        margin: 18px 0;
+        border-radius: 0;
+        box-shadow: none;
+        padding: 16px 4vw 14px 4vw;
+    }
+    .main-header {
+        border-radius: 0;
+    }
+    .side-nav {
+        width: 220px;
+    }
 }
