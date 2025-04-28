@@ -1,0 +1,150 @@
+body {
+    background: #f4f4f4;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    background: #fff;
+    max-width: 500px;
+    margin: 40px auto;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    border-radius: 8px;
+    padding: 32px 24px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+p {
+    text-align: center;
+    color: #666;
+    font-size: 1rem;
+}
+
+.addon-actions {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 18px;
+}
+
+#search {
+    flex: 1;
+    padding: 8px;
+    border-radius: 3px;
+    border: 1px solid #bbb;
+}
+
+#toggle-upload {
+    padding: 8px 16px;
+    background: #2979ff;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+#toggle-upload:hover {
+    background: #1351af;
+}
+
+#upload-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 18px;
+    margin-top: 8px;
+}
+
+#upload-form input[type="text"],
+#upload-form input[type="url"] {
+    padding: 8px;
+    border-radius: 3px;
+    border: 1px solid #bbb;
+}
+
+#upload-form button {
+    background: #43b04a;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    padding: 8px 0;
+    cursor: pointer;
+}
+
+#upload-form button:hover {
+    background: #2c7a2c;
+}
+
+#addon-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 16px;
+}
+
+#addon-list li {
+    background: #fafafa;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    margin-bottom: 14px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: relative;
+}
+
+.addon-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.addon-name {
+    font-weight: 600;
+    color: #222;
+}
+
+.addon-desc {
+    color: #555;
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+}
+
+.addon-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.addon-link {
+    background: #2979ff;
+    color: #fff;
+    padding: 7px 16px;
+    border: none;
+    border-radius: 3px;
+    text-decoration: none;
+    font-size: 0.93rem;
+    transition: background 0.2s;
+}
+
+.addon-link:hover {
+    background: #1351af;
+}
+
+.copy-btn {
+    background: #ffb300;
+    color: #333;
+    padding: 7px 14px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.93rem;
+    transition: background 0.2s;
+}
+
+.copy-btn:hover {
+    background: #b28704;
+}

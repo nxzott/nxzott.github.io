@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Addon Repository</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Addon Repository</h1>
+        <p>Situs sederhana untuk membagikan file addon.<br>
+        Klik untuk mengunduh atau upload file addon!</p>
+        
+        <div class="addon-actions">
+            <input type="text" id="search" placeholder="Cari addon...">
+            <button id="toggle-upload">Upload Addon</button>
+        </div>
+        
+        <form id="upload-form" style="display:none;">
+            <input type="text" id="addon-name" placeholder="Nama Addon" required>
+            <input type="text" id="addon-desc" placeholder="Deskripsi Addon" required>
+            <input type="url" id="addon-url" placeholder="URL Download (raw GitHub, Google Drive, dll)" required>
+            <button type="submit">Tambah Addon</button>
+        </form>
+        
+        <ul id="addon-list"></ul>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
