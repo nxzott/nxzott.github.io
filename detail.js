@@ -29,36 +29,16 @@ function renderDetail() {
         return;
     }
     const descClean = detail.desc ? detail.desc.replace(/!\[[^\]]*\]\((.*?)\)/g, '').trim() : "";
-    // Ganti SITE_KEY_MU dengan site key asli dari Google reCAPTCHA
-    const SITE_KEY_MU = "6LfuTCcrAAAAADhKe6fyFK-m6-1evUmkgetbA81b";
     container.innerHTML = `
         <div class="detail-title">${detail.name}</div>
         <div class="detail-desc">${descClean ? descClean.replace(/\n/g,"<br>") : '(No description)'}</div>
         <div class="detail-download">
-            <button class="detail-btn" type="button" id="downloadBtn" disabled>Download</button>
-            <div style="margin-top:16px;" id="captcha-container">
-                <div class="g-recaptcha" data-sitekey="${SITE_KEY_MU}" data-callback="recaptchaVerified"></div>
-            </div>
+            <button class="detail-btn" type="button" id="downloadBtn">Download</button>
         </div>
     `;
 
-    // Enable download button jika captcha tercentang
-    window.recaptchaVerified = function(token) {
-        document.getElementById('downloadBtn').disabled = false;
-    };
-
-    // Jika user uncheck recaptcha, disable lagi tombolnya (reCAPTCHA v2 tidak punya event uncheck, jadi reset saat download)
     document.getElementById('downloadBtn').addEventListener('click', function() {
-        // Cek token recaptcha
-        const token = grecaptcha.getResponse();
-        if (!token) {
-            alert("Please check the captcha before downloading!");
-            this.disabled = true;
-            return;
-        }
         startDownload(detail.url, detail.asset);
-        grecaptcha.reset();
-        this.disabled = true;
     });
     showLoader(false);
 }
