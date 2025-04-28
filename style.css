@@ -99,17 +99,16 @@ body {
     text-shadow: 0 1px 6px #111b;
 }
 
-/* SIDEBAR */
+/* SIDEBAR FIXED: No more visible part when closed! */
 .side-nav {
     width: 250px;
     background: var(--glass);
     position: fixed;
-    left: -270px;
     top: 0;
+    left: 0;
     height: 100vh;
     z-index: 300;
     box-shadow: var(--shadow);
-    transition: left 0.33s cubic-bezier(.4,0,.2,1), backdrop-filter .22s;
     display: flex;
     flex-direction: column;
     backdrop-filter: blur(var(--blur-strength));
@@ -118,8 +117,13 @@ body {
     border-bottom-right-radius: 18px;
     border-right: 1.5px solid #ffffff10;
     opacity: 0.99;
+    transform: translateX(-105%);
+    transition: transform 0.33s cubic-bezier(.4,0,.2,1), backdrop-filter .22s;
+    will-change: transform;
 }
-.side-nav.open { left: 0; }
+.side-nav.open {
+    transform: translateX(0);
+}
 .overlay {
     position: fixed;
     z-index: 250;
@@ -161,7 +165,14 @@ body {
     padding-left: 24px;
 }
 
-/* ...main, search, list setup... */
+/* Responsive sidebar width */
+@media (max-width: 600px) {
+    .side-nav {
+        width: 75vw;
+        min-width: 180px;
+        max-width: 94vw;
+    }
+}
 
 main {
     max-width: 540px;
