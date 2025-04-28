@@ -1,7 +1,7 @@
 // KONFIGURASI: Ganti dengan repo dan folder kamu!
-const GITHUB_OWNER = "username";
-const GITHUB_REPO = "repo";
-const GITHUB_PATH = "addons"; // kosongkan "" jika root repo
+const GITHUB_OWNER = "nxzott";
+const GITHUB_REPO = "addons";
+const GITHUB_PATH = "list"; // kosongkan "" jika root repo
 
 let addons = [
     // Tambahkan manual jika ingin
