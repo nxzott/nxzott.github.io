@@ -1,6 +1,6 @@
 const GITHUB_OWNER = "nxzott";
 const GITHUB_REPO = "addon";
-const PAGE_SIZE = 6;
+const PAGE_SIZE = 5;
 
 let allAddons = [];
 let shownCount = 0;
@@ -50,6 +50,18 @@ const list = document.getElementById('addon-list');
 const searchInput = document.getElementById('search');
 const scrollTopBtn = document.getElementById('scrollTopBtn');
 
+// Tambahkan tombol load more
+let loadMoreBtn = document.createElement('button');
+loadMoreBtn.id = "loadMoreBtn";
+loadMoreBtn.textContent = "Load More";
+loadMoreBtn.className = "addon-link";
+loadMoreBtn.style.display = "none";
+loadMoreBtn.style.margin = "22px auto 0 auto";
+loadMoreBtn.onclick = function () {
+    renderItems(false);
+};
+list.parentNode.appendChild(loadMoreBtn);
+
 function renderItems(reset = false) {
     if (reset) {
         list.innerHTML = "";
@@ -84,18 +96,14 @@ function renderItems(reset = false) {
         li.querySelector('.addon-link').addEventListener('contextmenu', e => e.preventDefault());
     }
     shownCount = end;
-}
 
-function handleScroll() {
-    // If mendekati bawah 500px, load more
-    if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 500)) {
-        if (shownCount < filteredAddons.length) {
-            renderItems(false);
-        }
+    // Tampilkan atau sembunyikan tombol Load More
+    if (shownCount < filteredAddons.length) {
+        loadMoreBtn.style.display = "block";
+    } else {
+        loadMoreBtn.style.display = "none";
     }
 }
-
-let scrollHandlerAttached = false;
 
 function renderList(addonList, filter = "", reset = true) {
     shownCount = 0;
@@ -109,15 +117,10 @@ function renderList(addonList, filter = "", reset = true) {
     if (filteredAddons.length === 0) {
         list.innerHTML = "<li>No addons found.</li>";
         shownCount = 0;
+        loadMoreBtn.style.display = "none";
         return;
     }
     renderItems(true);
-
-    // Attach infinite scroll once
-    if (!scrollHandlerAttached) {
-        window.addEventListener('scroll', handleScroll);
-        scrollHandlerAttached = true;
-    }
 }
 
 async function init() {
