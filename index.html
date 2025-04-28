@@ -3,43 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Addon Repository</title>
+    <title>nxzott</title>
     <link rel="stylesheet" href="style.css">
     <!-- Material Icons Google Fonts -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-    <header class="main-header">
+    <header class="main-header glass-blur">
         <div class="header-left">
-            <button class="menu-btn" id="menu-btn">
+            <button class="menu-btn" id="menu-btn" title="Menu">
                 <span class="material-icons">menu</span>
             </button>
-            <img src="https://cdn.jsdelivr.net/gh/google/material-design-icons@master/png/action/extension/materialicons/48dp/2x/baseline_extension_white_48dp.png" alt="icon" class="header-icon">
-            <span class="header-title">Addon Repository</span>
+            <img src="image/pack_icon.png" alt="icon" class="header-icon">
+            <span class="header-title">nxzott</span>
         </div>
+        <button id="theme-toggle" class="theme-toggle" title="Toggle dark/light mode">
+            <span class="material-icons">dark_mode</span>
+        </button>
     </header>
-    <nav class="side-nav" id="side-nav">
+    <nav class="side-nav glass-blur" id="side-nav">
         <div class="nav-content">
             <div class="nav-title">Menu</div>
             <ul>
                 <li><a href="#">Beranda</a></li>
-                <li><a href="#">Tentang</a></li>
-                <li><a href="https://github.com/" target="_blank">GitHub</a></li>
+                <li><a href="https://github.com/nxzott/addon/releases" target="_blank">Releases</a></li>
+                <li><a href="https://github.com/nxzott/" target="_blank">GitHub</a></li>
             </ul>
         </div>
     </nav>
     <div class="overlay" id="overlay"></div>
     <main>
-        <section class="intro">
-            <h1>Selamat Datang</h1>
-            <p>Situs sederhana untuk membagikan file addon.<br>
-            Klik untuk mengunduh file addon yang kamu butuhkan!</p>
-        </section>
         <div class="addon-actions">
             <input type="text" id="search" placeholder="Cari addon...">
         </div>
         <ul id="addon-list"></ul>
     </main>
+    <button id="scrollTopBtn" class="scroll-top-btn" title="Scroll to top">
+        <span class="material-icons">expand_less</span>
+    </button>
+    <div id="toast" class="toast"></div>
+    <div id="loader" class="loader-container" style="display:none;">
+        <div class="loader-spinner"></div>
+        <div class="loader-text">Loading addon list...</div>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
