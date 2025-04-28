@@ -53,7 +53,6 @@ body {
     height: 100%;
 }
 
-/* Hapus menu-btn & sidebar */
 .menu-btn, .back-btn, .scroll-top-btn {
     background: none !important;
     border: none !important;
@@ -104,7 +103,6 @@ body {
     text-shadow: 0 1px 6px #111b;
 }
 
-/* Hapus sidebar */
 .side-nav, .overlay { display: none !important; }
 
 main {
@@ -189,7 +187,6 @@ main {
     text-shadow: 0 2px 12px #2e365d23;
 }
 
-/* LIMIT TEXT pada deskripsi di list */
 .addon-desc {
     color: var(--grey);
     font-size: 1.07rem;
@@ -211,7 +208,6 @@ main {
     gap: 16px;
 }
 
-/* ONLY Download button is outline, no underline */
 .addon-link,
 .detail-btn {
     background: transparent;
@@ -308,7 +304,6 @@ main {
     text-shadow: 0 1px 8px #000b;
 }
 
-/* Detail Page */
 .detail-container {
     background: var(--glass);
     border: 2px solid #23243b;
@@ -365,6 +360,39 @@ main {
     .header-left { width: 100%; }
 }
 
+.site-credit {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 12px;
+    width: 100vw;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+}
+.site-credit-inner {
+    pointer-events: auto;
+    background: rgba(20,18,28,0.90);
+    color: #fff;
+    border-radius: 18px;
+    font-size: 1.05em;
+    padding: 8px 28px 8px 28px;
+    box-shadow: 0 2px 22px #111a;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-align: center;
+    user-select: none;
+    opacity: 0.96;
+    text-shadow: 0 1px 8px #000a;
+}
+@media (max-width: 600px) {
+    .site-credit-inner {
+        font-size: 0.97em;
+        padding: 7px 7vw;
+        border-radius: 14px;
+    }
+}
 @media (max-width: 430px) {
     .header-title { font-size: 1.15rem; }
     #addon-list li, .detail-container { padding: 13px 2vw 8px 2vw; }
