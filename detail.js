@@ -37,7 +37,7 @@ function renderDetail() {
         </div>
     `;
 
-    const siteKey = "SITE_KEY_KAMU"; // <--- Ganti dengan site key Turnstile milikmu!
+    const siteKey = "0x4AAAAAABV0BzZCFKxhh9mb"; // <--- Ganti dengan site key Turnstile milikmu!
     const showCaptchaBtn = document.getElementById('showCaptchaBtn');
     const turnstileContainer = document.getElementById('turnstile-container');
     const downloadBtn = document.getElementById('downloadBtn');
