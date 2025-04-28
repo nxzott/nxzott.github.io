@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap');
+@import url('https://fonts.cdnfonts.com/css/minecraft-ten');
+@import url('https://fonts.cdnfonts.com/css/mojangles');
 
 :root {
     --primary: #8f7aff;
@@ -70,9 +72,7 @@ body {
     transition: background 0.15s, color 0.15s, filter 0.15s;
     position: relative;
 }
-.menu-btn, .back-btn {
-    display: none;
-}
+.menu-btn, .back-btn { display: none; }
 
 .header-icon {
     width: 40px;
@@ -94,7 +94,9 @@ body {
     filter: brightness(1.25) drop-shadow(0 4px 16px #8f7aff33);
 }
 
+/* KECUALIKAN title website */
 .header-title {
+    font-family: 'Roboto', Arial, sans-serif !important;
     font-size: 1.45rem;
     font-weight: 800;
     letter-spacing: 0.07em;
@@ -103,6 +105,39 @@ body {
     text-shadow: 0 1px 6px #111b;
 }
 
+/* TAMBAHKAN COVER ADDON */
+.addon-cover {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    object-fit: cover;
+    background: #14141b;
+    box-shadow: 0 2px 14px #0007;
+    border: 2px solid #23243b;
+    flex-shrink: 0;
+    display: block;
+}
+@media (max-width:500px) {
+    .addon-cover { width: 32px; height: 32px; border-radius: 8px;}
+}
+
+/* Judul Addon (kartu dan detail) pakai MinecraftTen */
+.addon-name,
+.detail-title {
+    font-family: 'Minecraft Ten', sans-serif;
+    font-weight: normal;
+    letter-spacing: 0.03em;
+}
+
+/* Deskripsi Addon (kartu dan detail) pakai Mojangles */
+.addon-desc,
+.detail-desc {
+    font-family: 'Mojangles', sans-serif;
+    font-weight: normal;
+    letter-spacing: 0.01em;
+}
+
+/* Hapus sidebar */
 .side-nav, .overlay { display: none !important; }
 
 main {
@@ -176,31 +211,16 @@ main {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    gap: 12px;
-}
-.addon-cover {
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
-    object-fit: cover;
-    background: #14141b;
-    box-shadow: 0 2px 14px #0007;
-    border: 2px solid #23243b;
-    flex-shrink: 0;
-    display: block;
-}
-@media (max-width:500px) {
-    .addon-cover { width: 32px; height: 32px; border-radius: 8px;}
+    gap: 15px;
 }
 .addon-name {
-    font-weight: 900;
     color: #F1F1F3;
     font-size: 1.31em;
-    letter-spacing: 0.01em;
     filter: drop-shadow(0 0 2px #111b);
     text-shadow: 0 2px 12px #2e365d23;
 }
 
+/* LIMIT TEXT pada deskripsi di list */
 .addon-desc {
     color: var(--grey);
     font-size: 1.07rem;
@@ -208,7 +228,6 @@ main {
     white-space: pre-line;
     line-height: 1.53;
     word-break: break-word;
-    letter-spacing: 0.01em;
     display: -webkit-box;
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
@@ -222,6 +241,7 @@ main {
     gap: 16px;
 }
 
+/* ONLY Download button is outline, no underline */
 .addon-link,
 .detail-btn {
     background: transparent;
@@ -318,6 +338,7 @@ main {
     text-shadow: 0 1px 8px #000b;
 }
 
+/* Detail Page */
 .detail-container {
     background: var(--glass);
     border: 2px solid #23243b;
@@ -329,10 +350,8 @@ main {
     animation: fadeCard .7s cubic-bezier(.4,0,.2,1);
 }
 .detail-title {
-    font-size: 1.37em;
-    font-weight: 900;
     color: #fff;
-    letter-spacing: 0.05em;
+    font-size: 1.37em;
     margin-bottom: 8px;
     text-shadow: 0 2px 10px #222b;
 }
@@ -360,20 +379,7 @@ main {
     border-radius: 5px;
 }
 
-@media (max-width: 700px) {
-    main {
-        margin: 10px 0 0 0;
-        border-radius: 0;
-        box-shadow: none;
-        padding: 8px 2vw 12px 2vw;
-    }
-    .main-header { border-radius: 0; }
-    #addon-list li, .detail-container {
-        padding: 16px 5vw 11px 5vw;
-    }
-    .header-left { width: 100%; }
-}
-
+/* Credit bawah tengah */
 .site-credit {
     position: fixed;
     left: 0;
@@ -407,6 +413,21 @@ main {
         border-radius: 14px;
     }
 }
+
+@media (max-width: 700px) {
+    main {
+        margin: 10px 0 0 0;
+        border-radius: 0;
+        box-shadow: none;
+        padding: 8px 2vw 12px 2vw;
+    }
+    .main-header { border-radius: 0; }
+    #addon-list li, .detail-container {
+        padding: 16px 5vw 11px 5vw;
+    }
+    .header-left { width: 100%; }
+}
+
 @media (max-width: 430px) {
     .header-title { font-size: 1.15rem; }
     #addon-list li, .detail-container { padding: 13px 2vw 8px 2vw; }
