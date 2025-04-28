@@ -25,6 +25,8 @@ body {
     padding: 0;
     min-height: 100vh;
     transition: background 0.33s, color 0.33s;
+    /* Performance: force GPU acceleration for smoothness */
+    backface-visibility: hidden;
 }
 
 .glass-blur {
@@ -41,38 +43,44 @@ body {
     position: sticky;
     top: 0;
     z-index: 100;
-    justify-content: space-between;
+    justify-content: center;
     transition: background 0.18s;
+    will-change: background;
 }
 
 .header-left {
     display: flex;
     align-items: center;
     gap: 13px;
-    margin-left: 14px;
+    width: 100%;
+    justify-content: center;
 }
 
-.menu-btn, .back-btn, .scroll-top-btn {
-    background: var(--primary);
-    border: none;
-    color: #fff;
-    border-radius: var(--btn-outline-radius);
-    font-size: 1.4rem;
-    font-weight: 700;
-    transition: background 0.16s, color 0.16s, border 0.16s, box-shadow 0.18s, transform 0.13s;
-    padding: 4px 9px;
-    outline: none;
+.menu-btn, .back-btn {
+    background: none !important;
+    border: none !important;
+    color: #fff !important;
+    border-radius: 50%;
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7px;
     margin: 0;
+    outline: none;
+    box-shadow: none;
     cursor: pointer;
+    transition: background 0.15s, color 0.15s, filter 0.15s;
     position: relative;
-    overflow: hidden;
-    box-shadow: 0 2px 16px var(--btn-outline)11;
+    will-change: filter, background;
 }
-.menu-btn:hover, .back-btn:hover, .scroll-top-btn:hover {
-    background: var(--btn-outline-hover);
-    color: #fff;
-    box-shadow: 0 6px 26px var(--btn-outline)44;
-    transform: scale(1.08);
+.menu-btn:hover, .back-btn:hover {
+    background: rgba(255,255,255,0.10);
+    filter: brightness(1.3) drop-shadow(0 2px 8px #fff5);
+}
+.menu-btn:active, .back-btn:active {
+    background: rgba(255,255,255,0.16);
+    filter: brightness(1.8);
 }
 
 .header-icon {
@@ -136,12 +144,13 @@ body {
 
 .nav-content { padding: 32px 22px 18px 24px; }
 .nav-title {
-    color: var(--primary);
-    font-weight: 600;
-    font-size: 1.15em;
-    margin-bottom: 19px;
-    letter-spacing: 0.05em;
+    color: #fff !important;
+    font-weight: 700;
+    font-size: 1.13em;
+    margin-bottom: 16px;
+    letter-spacing: 0.04em;
 }
+
 .side-nav ul {
     list-style: none;
     padding: 0;
@@ -149,7 +158,7 @@ body {
 }
 .side-nav li { margin-bottom: 16px; }
 .side-nav a {
-    color: var(--btn-outline);
+    color: #fff !important;
     text-decoration: none;
     font-size: 1.12em;
     padding: 11px 16px;
@@ -160,8 +169,8 @@ body {
     position: relative;
 }
 .side-nav a:hover {
-    background: var(--btn-bg-hover);
-    color: var(--btn-outline-hover);
+    background: rgba(255,255,255,0.09);
+    color: #eee !important;
     padding-left: 24px;
 }
 
@@ -201,6 +210,7 @@ main {
     outline: none;
     transition: border 0.2s, box-shadow 0.2s, background 0.22s;
     font-weight: 500;
+    will-change: border, background;
 }
 #search:focus {
     border: 1.8px solid var(--primary);
@@ -227,8 +237,10 @@ main {
     animation: fadeCard .7s cubic-bezier(.4,0,.2,1);
     backdrop-filter: blur(3.5px);
     transition: border .18s, box-shadow .18s, transform .16s;
-    will-change: box-shadow, transform;
+    will-change: box-shadow, transform, opacity;
     opacity: 0.98;
+    backface-visibility: hidden;
+    transform: translateZ(0);
 }
 #addon-list li:hover {
     border: 2px solid var(--primary);
@@ -298,6 +310,7 @@ main {
     position: relative;
     overflow: hidden;
     text-decoration: none !important;
+    will-change: background, color, border, box-shadow, transform;
 }
 .addon-link:hover,
 .detail-btn:hover {
@@ -314,6 +327,31 @@ main {
     border-color: var(--btn-outline);
 }
 
+.scroll-top-btn {
+    display: none;
+    position: fixed;
+    bottom: 30px;
+    right: 26px;
+    border-radius: 50%;
+    width: 52px;
+    height: 52px;
+    font-size: 2.3rem;
+    z-index: 120;
+    padding: 0;
+    background: none;
+    border: none;
+    color: #fff;
+    box-shadow: none;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s, color 0.15s;
+    will-change: background;
+}
+.scroll-top-btn:hover {
+    background: rgba(255,255,255,0.10);
+    color: #b5a5ff;
+}
+
 .loader-container {
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
@@ -325,6 +363,7 @@ main {
     align-items: center;
     transition: opacity 0.3s;
     backdrop-filter: blur(9px);
+    will-change: opacity;
 }
 
 .loader-spinner {
@@ -336,6 +375,7 @@ main {
     animation: spinLoader 1.1s linear infinite;
     margin-bottom: 20px;
     box-shadow: 0 2px 22px #5568fe33;
+    will-change: transform;
 }
 
 @keyframes spinLoader {
@@ -361,6 +401,9 @@ main {
     margin-top: 32px;
     margin-bottom: 28px;
     animation: fadeCard .7s cubic-bezier(.4,0,.2,1);
+    will-change: box-shadow, transform, opacity;
+    backface-visibility: hidden;
+    transform: translateZ(0);
 }
 .detail-title {
     font-size: 1.37em;
@@ -385,6 +428,15 @@ main {
     margin-top: 12px;
 }
 
+::-webkit-scrollbar {
+    width: 10px;
+    background: var(--surface);
+}
+::-webkit-scrollbar-thumb {
+    background: #22243a;
+    border-radius: 5px;
+}
+
 @media (max-width: 700px) {
     main {
         margin: 10px 0 0 0;
@@ -397,10 +449,12 @@ main {
     #addon-list li, .detail-container {
         padding: 16px 5vw 11px 5vw;
     }
+    .header-left { width: 100%; }
 }
 
 @media (max-width: 430px) {
     .header-title { font-size: 1.15rem; }
     #addon-list li, .detail-container { padding: 13px 2vw 8px 2vw; }
     .addon-link, .detail-btn { font-size: 1.01rem; padding: 9px 13px; }
+    .side-nav { min-width: 0; }
 }
