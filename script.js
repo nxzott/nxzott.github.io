@@ -49,6 +49,13 @@ const searchInput = document.getElementById('search');
 const scrollTopBtn = document.getElementById('scrollTopBtn');
 
 // == RENDER LIST ==
+function extractCoverUrl(desc) {
+    // Regex untuk markdown image: ![alt](url)
+    const m = desc && desc.match(/!\[[^\]]*\]\((.*?)\)/);
+    if (m && m[1]) return m[1];
+    return null;
+}
+
 function renderList(addonList, filter = "") {
     list.innerHTML = "";
     let filtered = addonList;
@@ -63,17 +70,21 @@ function renderList(addonList, filter = "") {
         return;
     }
     filtered.forEach((addon, idx) => {
+        // Ambil cover/icon dari deskripsi
+        const coverUrl = extractCoverUrl(addon.desc) || 'image/pack_icon.png';
+        // Hapus baris markdown image di deskripsi
+        const descClean = addon.desc ? addon.desc.replace(/!\[[^\]]*\]\((.*?)\)/g, '').trim() : "";
         const li = document.createElement('li');
         li.innerHTML = `
-            <div class="addon-header">
+            <div class="addon-header" style="gap:15px;">
+                <img src="${coverUrl}" alt="cover" class="addon-cover">
                 <span class="addon-name">${addon.name}</span>
             </div>
-            <div class="addon-desc">${addon.desc ? addon.desc.replace(/\n/g, "<br>") : "(Tidak ada deskripsi)"}</div>
+            <div class="addon-desc">${descClean ? descClean.replace(/\n/g, "<br>") : "(Tidak ada deskripsi)"}</div>
             <div class="addon-buttons">
                 <button class="addon-link" type="button" data-asset="${encodeURIComponent(addon.asset)}" data-url="${encodeURIComponent(addon.url)}">Download</button>
             </div>
         `;
-        // Animasi
         li.style.opacity = "0";
         li.style.transform = "translateY(24px) scale(0.97)";
         setTimeout(() => {
@@ -83,7 +94,6 @@ function renderList(addonList, filter = "") {
         }, 70 + idx * 70);
         list.appendChild(li);
 
-        // Simpan data ke localStorage agar detail.html bisa akses
         li.querySelector('.addon-link').addEventListener('click', function(e){
             const detailData = {
                 name: addon.name,
@@ -94,7 +104,6 @@ function renderList(addonList, filter = "") {
             localStorage.setItem('addon-detail', JSON.stringify(detailData));
             window.location.href = `detail.html?name=${encodeURIComponent(addon.name)}`;
         });
-        // Hapus context menu agar tidak bisa disalin/link di-press lama
         li.querySelector('.addon-link').addEventListener('contextmenu', e => e.preventDefault());
     });
 }
