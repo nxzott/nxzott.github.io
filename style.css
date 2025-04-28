@@ -35,6 +35,8 @@ body {
     padding: 0;
     min-height: 100vh;
     transition: background 0.18s, color 0.18s;
+    display: flex;
+    flex-direction: column;
 }
 
 .main-header {
@@ -90,6 +92,7 @@ main {
     border-radius: 18px;
     padding: 12px 0 24px 0;
     min-height: 70vh;
+    flex: 1 0 auto;
 }
 
 .addon-actions {
@@ -134,9 +137,6 @@ main {
     flex-direction: column;
     gap: 10px;
     position: relative;
-    /* Lebih ringan tanpa shadow dan blur */
-    /* box-shadow: none; */
-    /* No animation for best perf */
 }
 
 .addon-header {
@@ -291,15 +291,16 @@ main {
     border-radius: 5px;
 }
 
+/* FOOTER REVISI AGAR TIDAK FIXED, SELALU DI BAWAH, DAN RESPONSIF */
 .site-credit {
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 12px;
     width: 100vw;
-    z-index: 999;
     display: flex;
     justify-content: center;
+    position: static;
+    margin-top: 32px;
+    margin-bottom: 10px;
+    flex-shrink: 0;
+    z-index: 1;
     pointer-events: none;
 }
 .site-credit-inner {
