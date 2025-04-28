@@ -10,7 +10,7 @@ async function fetchAddonsFromReleases() {
     let api = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/releases`;
     try {
         const res = await fetch(api);
-        if (!res.ok) throw new Error("Gagal fetch dari GitHub Releases");
+        if (!res.ok) throw new Error("Failed to fetch from GitHub Releases");
         const releases = await res.json();
         let githubAddons = [];
         for (const release of releases) {
@@ -64,7 +64,7 @@ function renderItems(reset = false) {
             <div class="addon-header">
                 <span class="addon-name">${addon.name}</span>
             </div>
-            <div class="addon-desc">${descClean ? descClean.replace(/\n/g, "<br>") : "(Tidak ada deskripsi)"}</div>
+            <div class="addon-desc">${descClean ? descClean.replace(/\n/g, "<br>") : "(No description)"}</div>
             <div class="addon-buttons">
                 <button class="addon-link" type="button" data-asset="${encodeURIComponent(addon.asset)}" data-url="${encodeURIComponent(addon.url)}">Download</button>
             </div>
@@ -107,7 +107,7 @@ function renderList(addonList, filter = "", reset = true) {
         );
     }
     if (filteredAddons.length === 0) {
-        list.innerHTML = "<li>Tidak ada addon ditemukan.</li>";
+        list.innerHTML = "<li>No addons found.</li>";
         shownCount = 0;
         return;
     }
