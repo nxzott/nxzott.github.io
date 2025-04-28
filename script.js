@@ -70,7 +70,7 @@ function renderList(addonList, filter = "") {
             </div>
             <div class="addon-desc">${addon.desc ? addon.desc.replace(/\n/g, "<br>") : "(Tidak ada deskripsi)"}</div>
             <div class="addon-buttons">
-                <a class="addon-link" href="detail.html?name=${encodeURIComponent(addon.name)}" data-asset="${encodeURIComponent(addon.asset)}" data-url="${encodeURIComponent(addon.url)}">Download</a>
+                <button class="addon-link" type="button" data-asset="${encodeURIComponent(addon.asset)}" data-url="${encodeURIComponent(addon.url)}">Download</button>
             </div>
         `;
         // Animasi
@@ -92,7 +92,10 @@ function renderList(addonList, filter = "") {
                 asset: addon.asset
             };
             localStorage.setItem('addon-detail', JSON.stringify(detailData));
+            window.location.href = `detail.html?name=${encodeURIComponent(addon.name)}`;
         });
+        // Hapus context menu agar tidak bisa disalin/link di-press lama
+        li.querySelector('.addon-link').addEventListener('contextmenu', e => e.preventDefault());
     });
 }
 
