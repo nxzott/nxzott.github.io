@@ -46,25 +46,7 @@ function showLoader(show = true) {
 // == DOM ELEMENTS ==
 const list = document.getElementById('addon-list');
 const searchInput = document.getElementById('search');
-const menuBtn = document.getElementById('menu-btn');
-const sideNav = document.getElementById('side-nav');
-const overlay = document.getElementById('overlay');
 const scrollTopBtn = document.getElementById('scrollTopBtn');
-
-// == SIDEBAR ==
-function openNav() {
-    sideNav.classList.add("open");
-    overlay.classList.add("active");
-}
-function closeNav() {
-    sideNav.classList.remove("open");
-    overlay.classList.remove("active");
-}
-menuBtn.onclick = openNav;
-overlay.onclick = closeNav;
-sideNav.onclick = e => {
-    if (e.target.tagName === "A") closeNav();
-};
 
 // == RENDER LIST ==
 function renderList(addonList, filter = "") {
