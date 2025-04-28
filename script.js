@@ -1,35 +1,37 @@
-// KONFIGURASI: Ganti dengan repo dan folder kamu!
 const GITHUB_OWNER = "nxzott";
-const GITHUB_REPO = "addons";
-const GITHUB_PATH = "file"; // kosongkan "" jika root repo
+const GITHUB_REPO = "addon";
 
-let addons = [
-    // Tambahkan manual jika ingin
-    // {
-    //     name: "Contoh Addon Lokal",
-    //     desc: "Addon lokal dari browser.",
-    //     url: "https://github.com/username/repo/raw/main/addons/addon.zip"
-    // }
-];
-
-async function fetchAddonsFromGitHub() {
-    let api = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${GITHUB_PATH}`;
+async function fetchAddonsFromReleases() {
+    let api = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/releases`;
     try {
         const res = await fetch(api);
-        if (!res.ok) throw new Error("Gagal fetch dari GitHub");
-        const files = await res.json();
-        // Filter hanya file yang diinginkan (misal zip/mcaddon/mcpack)
-        const githubAddons = files.filter(f =>
-            f.type === "file" &&
-            (f.name.endsWith(".zip") || f.name.endsWith(".mcaddon") || f.name.endsWith(".mcpack"))
-        ).map(f => ({
-            name: f.name,
-            desc: "Dari GitHub repo.",
-            url: f.download_url
-        }));
+        if (!res.ok) throw new Error("Gagal fetch dari GitHub Releases");
+        const releases = await res.json();
+        let githubAddons = [];
+        for (const release of releases) {
+            const releaseName = release.name || release.tag_name;
+            const releaseDesc = release.body || "";
+            if (release.assets && release.assets.length > 0) {
+                for (const asset of release.assets) {
+                    // Tambahkan filter di bawah ini!
+                    if (
+                        asset.name.endsWith(".zip") ||
+                        asset.name.endsWith(".mcaddon") ||
+                        asset.name.endsWith(".mcpack")
+                    ) {
+                        githubAddons.push({
+                            name: asset.name,
+                            desc: (releaseDesc ? releaseDesc + "\n\n" : "") + (asset.label || ""),
+                            url: asset.browser_download_url,
+                            release: releaseName
+                        });
+                    }
+                }
+            }
+        }
         return githubAddons;
     } catch (e) {
-        console.error("Fetch GitHub error:", e);
+        console.error("Fetch GitHub Releases error:", e);
         return [];
     }
 }
@@ -37,31 +39,14 @@ async function fetchAddonsFromGitHub() {
 const list = document.getElementById('addon-list');
 const searchInput = document.getElementById('search');
 
-// Side nav logic
-const menuBtn = document.getElementById('menu-btn');
-const sideNav = document.getElementById('side-nav');
-const overlay = document.getElementById('overlay');
-function openNav() {
-    sideNav.classList.add("open");
-    overlay.classList.add("active");
-}
-function closeNav() {
-    sideNav.classList.remove("open");
-    overlay.classList.remove("active");
-}
-menuBtn.onclick = openNav;
-overlay.onclick = closeNav;
-sideNav.onclick = e => {
-    if (e.target.tagName === "A") closeNav();
-};
-
 function renderList(addonList, filter = "") {
     list.innerHTML = "";
     let filtered = addonList;
     if (filter) {
         filtered = addonList.filter(
-            a => a.name.toLowerCase().includes(filter.toLowerCase()) 
-                || a.desc.toLowerCase().includes(filter.toLowerCase())
+            a => (a.name && a.name.toLowerCase().includes(filter.toLowerCase())) 
+                || (a.desc && a.desc.toLowerCase().includes(filter.toLowerCase()))
+                || (a.release && a.release.toLowerCase().includes(filter.toLowerCase()))
         );
     }
     if (filtered.length === 0) {
@@ -73,8 +58,9 @@ function renderList(addonList, filter = "") {
         li.innerHTML = `
             <div class="addon-header">
                 <span class="addon-name">${addon.name}</span>
+                <span class="addon-release" style="color:#43B781;font-size:0.95em;font-weight:500;">${addon.release || ""}</span>
             </div>
-            <div class="addon-desc">${addon.desc || "(Tidak ada deskripsi)"}</div>
+            <div class="addon-desc">${addon.desc ? addon.desc.replace(/\n/g, "<br>") : "(Tidak ada deskripsi)"}</div>
             <div class="addon-buttons">
                 <a class="addon-link" href="${addon.url}" download>Download</a>
                 <button class="copy-btn" data-url="${addon.url}">Copy Link</button>
@@ -97,12 +83,8 @@ function renderList(addonList, filter = "") {
 let allAddons = [];
 
 async function init() {
-    const githubAddons = await fetchAddonsFromGitHub();
-    const localNames = new Set(addons.map(a => a.name));
-    allAddons = [
-        ...githubAddons,
-        ...addons.filter(a => !localNames.has(a.name))
-    ];
+    const githubAddons = await fetchAddonsFromReleases();
+    allAddons = githubAddons;
     renderList(allAddons);
 }
 init();
