@@ -10,10 +10,10 @@
 <body>
     <header class="main-header glass-blur">
         <div class="header-left">
-            <a href="index.html" class="back-btn" title="Kembali ke Beranda">
+            <a href="index.html" class="back-btn" title="Kembali ke Beranda" style="display:none">
                 <span class="material-icons">arrow_back</span>
             </a>
-            <img src="image/pack_icon.png" alt="icon" class="header-icon no-bg">
+            <img src="image/pack_icon.png" alt="icon" class="header-icon no-bg" id="tiktok-logo">
             <span class="header-title">N I Z Λ M</span>
         </div>
     </header>
@@ -25,5 +25,15 @@
         <div class="loader-text">Loading addon...</div>
     </div>
     <script src="detail.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const tiktok = document.getElementById('tiktok-logo');
+        if (tiktok) {
+            tiktok.addEventListener('click', function() {
+                window.open('https://www.tiktok.com/@nxzovt', '_blank');
+            });
+        }
+    });
+    </script>
 </body>
 </html>
