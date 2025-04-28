@@ -1,34 +1,65 @@
-// Daftar addon (bisa diisi manual, atau akan bertambah jika user upload)
+// KONFIGURASI: Ganti dengan repo dan folder kamu!
+const GITHUB_OWNER = "username";
+const GITHUB_REPO = "repo";
+const GITHUB_PATH = "addons"; // kosongkan "" jika root repo
+
 let addons = [
-    {
-        name: "Contoh Addon 1",
-        desc: "Addon untuk fitur A. Cek changelog di repo.",
-        url: "https://github.com/username/repo/raw/main/addon1.zip"
-    },
-    {
-        name: "Contoh Addon 2",
-        desc: "Addon ringan khusus fitur B.",
-        url: "https://github.com/username/repo/raw/main/addon2.zip"
-    }
+    // Tambahkan manual jika ingin
+    // {
+    //     name: "Contoh Addon Lokal",
+    //     desc: "Addon lokal dari browser.",
+    //     url: "https://github.com/username/repo/raw/main/addons/addon.zip"
+    // }
 ];
 
-// Load dari localStorage jika ada
-if (localStorage.getItem('addons')) {
+async function fetchAddonsFromGitHub() {
+    let api = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${GITHUB_PATH}`;
     try {
-        addons = JSON.parse(localStorage.getItem('addons'));
-    } catch {}
+        const res = await fetch(api);
+        if (!res.ok) throw new Error("Gagal fetch dari GitHub");
+        const files = await res.json();
+        // Filter hanya file yang diinginkan (misal zip/mcaddon/mcpack)
+        const githubAddons = files.filter(f =>
+            f.type === "file" &&
+            (f.name.endsWith(".zip") || f.name.endsWith(".mcaddon") || f.name.endsWith(".mcpack"))
+        ).map(f => ({
+            name: f.name,
+            desc: "Dari GitHub repo.",
+            url: f.download_url
+        }));
+        return githubAddons;
+    } catch (e) {
+        console.error("Fetch GitHub error:", e);
+        return [];
+    }
 }
 
 const list = document.getElementById('addon-list');
-const form = document.getElementById('upload-form');
-const toggleUpload = document.getElementById('toggle-upload');
 const searchInput = document.getElementById('search');
 
-function renderList(filter = "") {
+// Side nav logic
+const menuBtn = document.getElementById('menu-btn');
+const sideNav = document.getElementById('side-nav');
+const overlay = document.getElementById('overlay');
+function openNav() {
+    sideNav.classList.add("open");
+    overlay.classList.add("active");
+}
+function closeNav() {
+    sideNav.classList.remove("open");
+    overlay.classList.remove("active");
+}
+menuBtn.onclick = openNav;
+overlay.onclick = closeNav;
+sideNav.onclick = e => {
+    if (e.target.tagName === "A") closeNav();
+};
+
+function renderList(addonList, filter = "") {
     list.innerHTML = "";
-    let filtered = addons;
+    let filtered = addonList;
     if (filter) {
-        filtered = addons.filter(
+        filtered = addonList.filter(
             a => a.name.toLowerCase().includes(filter.toLowerCase()) 
                 || a.desc.toLowerCase().includes(filter.toLowerCase())
         );
@@ -63,25 +94,19 @@ function renderList(filter = "") {
     });
 }
 
-renderList();
+let allAddons = [];
 
-toggleUpload.onclick = () => {
-    form.style.display = (form.style.display === "none") ? "flex" : "none";
-};
-
-form.onsubmit = e => {
-    e.preventDefault();
-    const name = document.getElementById('addon-name').value.trim();
-    const desc = document.getElementById('addon-desc').value.trim();
-    const url = document.getElementById('addon-url').value.trim();
-    if (!name || !desc || !url) return;
-    addons.push({ name, desc, url });
-    localStorage.setItem('addons', JSON.stringify(addons));
-    renderList(searchInput.value);
-    form.reset();
-    form.style.display = "none";
-};
+async function init() {
+    const githubAddons = await fetchAddonsFromGitHub();
+    const localNames = new Set(addons.map(a => a.name));
+    allAddons = [
+        ...githubAddons,
+        ...addons.filter(a => !localNames.has(a.name))
+    ];
+    renderList(allAddons);
+}
+init();
 
 searchInput.oninput = function() {
-    renderList(this.value);
+    renderList(allAddons, this.value);
 };
