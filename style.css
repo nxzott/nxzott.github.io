@@ -1,27 +1,29 @@
 body {
-    background: #f4f4f4;
+    background: #181A1B;
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    color: #E0E0E0;
 }
 
 .container {
-    background: #fff;
+    background: #222426;
     max-width: 500px;
     margin: 40px auto;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-    border-radius: 8px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.30);
+    border-radius: 10px;
     padding: 32px 24px;
 }
 
 h1 {
     text-align: center;
-    color: #333;
+    color: #F1F1F3;
+    letter-spacing: 1px;
 }
 
 p {
     text-align: center;
-    color: #666;
+    color: #B0B3B8;
     font-size: 1rem;
 }
 
@@ -35,20 +37,23 @@ p {
     flex: 1;
     padding: 8px;
     border-radius: 3px;
-    border: 1px solid #bbb;
+    border: 1px solid #343739;
+    background: #242629;
+    color: #E0E0E0;
 }
 
 #toggle-upload {
     padding: 8px 16px;
-    background: #2979ff;
+    background: #5568FE;
     color: #fff;
     border: none;
     border-radius: 3px;
     cursor: pointer;
+    transition: background 0.2s;
 }
 
 #toggle-upload:hover {
-    background: #1351af;
+    background: #3242a8;
 }
 
 #upload-form {
@@ -63,20 +68,23 @@ p {
 #upload-form input[type="url"] {
     padding: 8px;
     border-radius: 3px;
-    border: 1px solid #bbb;
+    border: 1px solid #343739;
+    background: #23272A;
+    color: #E0E0E0;
 }
 
 #upload-form button {
-    background: #43b04a;
+    background: #43B781;
     color: #fff;
     border: none;
     border-radius: 3px;
     padding: 8px 0;
     cursor: pointer;
+    transition: background 0.2s;
 }
 
 #upload-form button:hover {
-    background: #2c7a2c;
+    background: #297055;
 }
 
 #addon-list {
@@ -86,8 +94,8 @@ p {
 }
 
 #addon-list li {
-    background: #fafafa;
-    border: 1px solid #e0e0e0;
+    background: #242629;
+    border: 1px solid #2E3135;
     border-radius: 5px;
     margin-bottom: 14px;
     padding: 16px;
@@ -95,6 +103,7 @@ p {
     flex-direction: column;
     gap: 8px;
     position: relative;
+    box-shadow: 0 1px 6px rgba(30,30,40,0.15);
 }
 
 .addon-header {
@@ -105,12 +114,13 @@ p {
 
 .addon-name {
     font-weight: 600;
-    color: #222;
+    color: #F1F1F3;
+    font-size: 1.07em;
 }
 
 .addon-desc {
-    color: #555;
-    font-size: 0.95rem;
+    color: #B0B3B8;
+    font-size: 0.98rem;
     margin-bottom: 8px;
 }
 
@@ -120,7 +130,7 @@ p {
 }
 
 .addon-link {
-    background: #2979ff;
+    background: #5568FE;
     color: #fff;
     padding: 7px 16px;
     border: none;
@@ -131,12 +141,12 @@ p {
 }
 
 .addon-link:hover {
-    background: #1351af;
+    background: #3242a8;
 }
 
 .copy-btn {
-    background: #ffb300;
-    color: #333;
+    background: #43B781;
+    color: #fff;
     padding: 7px 14px;
     border: none;
     border-radius: 3px;
@@ -146,5 +156,15 @@ p {
 }
 
 .copy-btn:hover {
-    background: #b28704;
+    background: #297055;
+}
+
+/* Scrollbar styling for dark theme */
+::-webkit-scrollbar {
+    width: 10px;
+    background: #222426;
+}
+::-webkit-scrollbar-thumb {
+    background: #2E3135;
+    border-radius: 5px;
 }
