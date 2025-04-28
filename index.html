@@ -10,24 +10,10 @@
 <body>
     <header class="main-header glass-blur">
         <div class="header-left">
-            <button class="menu-btn" id="menu-btn" title="Menu">
-                <span class="material-icons">menu</span>
-            </button>
-            <img src="image/pack_icon.png" alt="icon" class="header-icon no-bg">
+            <img src="image/pack_icon.png" alt="icon" class="header-icon no-bg" id="tiktok-logo">
             <span class="header-title">N I Z Λ M</span>
         </div>
     </header>
-    <nav class="side-nav glass-blur" id="side-nav">
-        <div class="nav-content">
-            <div class="nav-title">Menu</div>
-            <ul>
-                <li><a href="#">Beranda</a></li>
-                <li><a href="https://github.com/nxzott/addon/releases" target="_blank">Releases</a></li>
-                <li><a href="https://github.com/nxzott/" target="_blank">GitHub</a></li>
-            </ul>
-        </div>
-    </nav>
-    <div class="overlay" id="overlay"></div>
     <main>
         <div class="addon-actions">
             <input type="text" id="search" placeholder="Cari addon...">
@@ -42,5 +28,15 @@
         <div class="loader-text">Loading addon list...</div>
     </div>
     <script src="script.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const tiktok = document.getElementById('tiktok-logo');
+        if (tiktok) {
+            tiktok.addEventListener('click', function() {
+                window.open('https://www.tiktok.com/@nxzovt', '_blank');
+            });
+        }
+    });
+    </script>
 </body>
 </html>
