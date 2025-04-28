@@ -16,10 +16,12 @@ function startDownload(url, filename) {
 
 function renderDetail() {
     showLoader(true);
+
     let detail = null;
     try {
         detail = JSON.parse(localStorage.getItem('addon-detail'));
     } catch { detail = null; }
+
     const container = document.getElementById('detail-container');
     if (!detail) {
         container.innerHTML = `<div style="color:#E46666;font-weight:600;font-size:1.2em;">Data not found.<br>Please return to homepage.</div>`;
@@ -27,55 +29,37 @@ function renderDetail() {
         return;
     }
     const descClean = detail.desc ? detail.desc.replace(/!\[[^\]]*\]\((.*?)\)/g, '').trim() : "";
+    // Ganti SITE_KEY_MU dengan site key asli dari Google reCAPTCHA
+    const SITE_KEY_MU = "6LfuTCcrAAAAADhKe6fyFK-m6-1evUmkgetbA81b";
     container.innerHTML = `
         <div class="detail-title">${detail.name}</div>
         <div class="detail-desc">${descClean ? descClean.replace(/\n/g,"<br>") : '(No description)'}</div>
         <div class="detail-download">
-            <button class="detail-btn" id="showCaptchaBtn" type="button" style="margin-bottom:12px;">Verify</button>
-            <div id="turnstile-container" style="margin-bottom:16px;display:none;"></div>
-            <button class="detail-btn" type="button" id="downloadBtn" style="display:none;">Download</button>
+            <button class="detail-btn" type="button" id="downloadBtn" disabled>Download</button>
+            <div style="margin-top:16px;" id="captcha-container">
+                <div class="g-recaptcha" data-sitekey="${SITE_KEY_MU}" data-callback="recaptchaVerified"></div>
+            </div>
         </div>
     `;
 
-    const siteKey = "0x4AAAAAABVv08CLpoZoYY_g"; // <--- Ganti dengan site key Turnstile milikmu!
-    const showCaptchaBtn = document.getElementById('showCaptchaBtn');
-    const turnstileContainer = document.getElementById('turnstile-container');
-    const downloadBtn = document.getElementById('downloadBtn');
+    // Enable download button jika captcha tercentang
+    window.recaptchaVerified = function(token) {
+        document.getElementById('downloadBtn').disabled = false;
+    };
 
-    let widgetDiv = null;
-
-    showCaptchaBtn.addEventListener('click', function() {
-        // Sembunyikan tombol verify
-        showCaptchaBtn.style.display = "none";
-        // Tampilkan container captcha
-        turnstileContainer.style.display = "block";
-        // Hapus widget lama jika ada (supaya render baru selalu berhasil)
-        turnstileContainer.innerHTML = "";
-        // Render widget
-        widgetDiv = document.createElement('div');
-        widgetDiv.className = "cf-turnstile";
-        widgetDiv.setAttribute("data-sitekey", siteKey);
-        widgetDiv.setAttribute("data-callback", "turnstileCallback");
-        widgetDiv.setAttribute("data-theme", "auto");
-        turnstileContainer.appendChild(widgetDiv);
-
-        // Pastikan callback global untuk Turnstile
-        window.turnstileCallback = function(token) {
-            if (token) {
-                // Captcha sukses: sembunyikan captcha, munculkan download
-                turnstileContainer.style.display = "none";
-                downloadBtn.style.display = "";
-            }
-        };
-    });
-
-    // Handler tombol download
-    downloadBtn.addEventListener('click', function() {
+    // Jika user uncheck recaptcha, disable lagi tombolnya (reCAPTCHA v2 tidak punya event uncheck, jadi reset saat download)
+    document.getElementById('downloadBtn').addEventListener('click', function() {
+        // Cek token recaptcha
+        const token = grecaptcha.getResponse();
+        if (!token) {
+            alert("Please check the captcha before downloading!");
+            this.disabled = true;
+            return;
+        }
         startDownload(detail.url, detail.asset);
-        // Download button tetap tampil, captcha tidak perlu diulang (kecuali kamu ingin reset)
+        grecaptcha.reset();
+        this.disabled = true;
     });
-    downloadBtn.addEventListener('contextmenu', e => e.preventDefault());
-
     showLoader(false);
 }
 window.onload = renderDetail;
