@@ -21,7 +21,6 @@ function renderDetail() {
         <div class="detail-desc">${detail.desc ? detail.desc.replace(/\n/g,"<br>") : '(Tidak ada deskripsi)'}</div>
         <div class="detail-download">
             <a class="detail-btn" href="${detail.url}" download>Download file</a>
-            <div class="detail-link">${detail.url}</div>
         </div>
     `;
     showLoader(false);
