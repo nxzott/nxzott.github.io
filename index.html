@@ -5,27 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Addon Repository</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Material Icons Google Fonts -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <h1>Addon Repository</h1>
-        <p>Situs sederhana untuk membagikan file addon.<br>
-        Klik untuk mengunduh atau upload file addon!</p>
-        
+    <header class="main-header">
+        <div class="header-left">
+            <button class="menu-btn" id="menu-btn">
+                <span class="material-icons">menu</span>
+            </button>
+            <img src="https://cdn.jsdelivr.net/gh/google/material-design-icons@master/png/action/extension/materialicons/48dp/2x/baseline_extension_white_48dp.png" alt="icon" class="header-icon">
+            <span class="header-title">Addon Repository</span>
+        </div>
+    </header>
+    <nav class="side-nav" id="side-nav">
+        <div class="nav-content">
+            <div class="nav-title">Menu</div>
+            <ul>
+                <li><a href="#">Beranda</a></li>
+                <li><a href="#">Tentang</a></li>
+                <li><a href="https://github.com/" target="_blank">GitHub</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="overlay" id="overlay"></div>
+    <main>
+        <section class="intro">
+            <h1>Selamat Datang</h1>
+            <p>Situs sederhana untuk membagikan file addon.<br>
+            Klik untuk mengunduh file addon yang kamu butuhkan!</p>
+        </section>
         <div class="addon-actions">
             <input type="text" id="search" placeholder="Cari addon...">
-            <button id="toggle-upload">Upload Addon</button>
         </div>
-        
-        <form id="upload-form" style="display:none;">
-            <input type="text" id="addon-name" placeholder="Nama Addon" required>
-            <input type="text" id="addon-desc" placeholder="Deskripsi Addon" required>
-            <input type="url" id="addon-url" placeholder="URL Download (raw GitHub, Google Drive, dll)" required>
-            <button type="submit">Tambah Addon</button>
-        </form>
-        
         <ul id="addon-list"></ul>
-    </div>
+    </main>
     <script src="script.js"></script>
 </body>
 </html>
