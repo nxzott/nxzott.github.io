@@ -6,7 +6,7 @@ async function fetchAddonsFromReleases() {
     let api = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/releases`;
     try {
         const res = await fetch(api);
-        if (!res.ok) throw new Error("Gagal fetch dari GitHub Releases");
+        if (!res.ok) throw new Error("Failed to fetch from GitHub Releases");
         const releases = await res.json();
         let githubAddons = [];
         for (const release of releases) {
@@ -43,12 +43,7 @@ function showLoader(show = true) {
     loader.style.display = show ? "flex" : "none";
 }
 
-// == DOM ELEMENTS ==
-const list = document.getElementById('addon-list');
-const searchInput = document.getElementById('search');
-const scrollTopBtn = document.getElementById('scrollTopBtn');
-
-// == RENDER LIST ==
+// == COVER EXTRACTOR ==
 function extractCoverUrl(desc) {
     // Regex untuk markdown image: ![alt](url)
     const m = desc && desc.match(/!\[[^\]]*\]\((.*?)\)/);
@@ -56,6 +51,12 @@ function extractCoverUrl(desc) {
     return null;
 }
 
+// == DOM ELEMENTS ==
+const list = document.getElementById('addon-list');
+const searchInput = document.getElementById('search');
+const scrollTopBtn = document.getElementById('scrollTopBtn');
+
+// == RENDER LIST ==
 function renderList(addonList, filter = "") {
     list.innerHTML = "";
     let filtered = addonList;
@@ -66,7 +67,7 @@ function renderList(addonList, filter = "") {
         );
     }
     if (filtered.length === 0) {
-        list.innerHTML = "<li>Tidak ada addon ditemukan.</li>";
+        list.innerHTML = "<li>No addons found.</li>";
         return;
     }
     filtered.forEach((addon, idx) => {
@@ -80,11 +81,12 @@ function renderList(addonList, filter = "") {
                 <img src="${coverUrl}" alt="cover" class="addon-cover">
                 <span class="addon-name">${addon.name}</span>
             </div>
-            <div class="addon-desc">${descClean ? descClean.replace(/\n/g, "<br>") : "(Tidak ada deskripsi)"}</div>
+            <div class="addon-desc">${descClean ? descClean.replace(/\n/g, "<br>") : "(No description)"}</div>
             <div class="addon-buttons">
                 <button class="addon-link" type="button" data-asset="${encodeURIComponent(addon.asset)}" data-url="${encodeURIComponent(addon.url)}">Download</button>
             </div>
         `;
+        // Animasi
         li.style.opacity = "0";
         li.style.transform = "translateY(24px) scale(0.97)";
         setTimeout(() => {
