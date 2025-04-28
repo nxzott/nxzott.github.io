@@ -23,6 +23,7 @@ async function fetchAddonsFromReleases() {
                             name: releaseName,
                             desc: releaseDesc,
                             url: asset.browser_download_url,
+                            asset: asset.name
                         });
                     }
                 }
@@ -48,8 +49,6 @@ const searchInput = document.getElementById('search');
 const menuBtn = document.getElementById('menu-btn');
 const sideNav = document.getElementById('side-nav');
 const overlay = document.getElementById('overlay');
-const themeToggle = document.getElementById('theme-toggle');
-const toast = document.getElementById('toast');
 const scrollTopBtn = document.getElementById('scrollTopBtn');
 
 // == SIDEBAR ==
@@ -66,37 +65,6 @@ overlay.onclick = closeNav;
 sideNav.onclick = e => {
     if (e.target.tagName === "A") closeNav();
 };
-
-// == DARK/LIGHT MODE ==
-function setTheme(mode) {
-    if (mode === "light") {
-        document.documentElement.setAttribute("data-theme", "light");
-        themeToggle.innerHTML = `<span class="material-icons">light_mode</span>`;
-        localStorage.setItem("theme", "light");
-    } else {
-        document.documentElement.removeAttribute("data-theme");
-        themeToggle.innerHTML = `<span class="material-icons">dark_mode</span>`;
-        localStorage.setItem("theme", "dark");
-    }
-}
-themeToggle.onclick = function() {
-    const current = document.documentElement.getAttribute("data-theme") === "light";
-    setTheme(current ? "dark" : "light");
-};
-(function autoDetectTheme() {
-    let saved = localStorage.getItem("theme");
-    if (!saved) {
-        saved = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? "light" : "dark";
-    }
-    setTheme(saved);
-})();
-
-// == TOAST NOTIF ==
-function showToast(msg) {
-    toast.textContent = msg;
-    toast.className = "toast show";
-    setTimeout(() => { toast.className = "toast"; }, 1850);
-}
 
 // == RENDER LIST ==
 function renderList(addonList, filter = "") {
@@ -120,11 +88,10 @@ function renderList(addonList, filter = "") {
             </div>
             <div class="addon-desc">${addon.desc ? addon.desc.replace(/\n/g, "<br>") : "(Tidak ada deskripsi)"}</div>
             <div class="addon-buttons">
-                <a class="addon-link" href="${addon.url}" download>Download</a>
-                <button class="copy-btn" data-url="${addon.url}">Copy Link</button>
+                <a class="addon-link" href="detail.html?name=${encodeURIComponent(addon.name)}" data-asset="${encodeURIComponent(addon.asset)}" data-url="${encodeURIComponent(addon.url)}">Download</a>
             </div>
         `;
-        // Animation: floating fade-in
+        // Animasi
         li.style.opacity = "0";
         li.style.transform = "translateY(24px) scale(0.97)";
         setTimeout(() => {
@@ -133,13 +100,17 @@ function renderList(addonList, filter = "") {
             li.style.transition = "opacity .6s cubic-bezier(.6,.03,.28,1), transform .6s cubic-bezier(.6,.03,.28,1)";
         }, 70 + idx * 70);
         list.appendChild(li);
-    });
-    // Event copy
-    document.querySelectorAll('.copy-btn').forEach(btn => {
-        btn.onclick = function(e) {
-            navigator.clipboard.writeText(this.dataset.url)
-                .then(() => showToast("Link berhasil disalin!"));
-        };
+
+        // Simpan data ke localStorage agar detail.html bisa akses
+        li.querySelector('.addon-link').addEventListener('click', function(e){
+            const detailData = {
+                name: addon.name,
+                desc: addon.desc,
+                url: addon.url,
+                asset: addon.asset
+            };
+            localStorage.setItem('addon-detail', JSON.stringify(detailData));
+        });
     });
 }
 
