@@ -16,6 +16,7 @@
     --header-height: 60px;
     --blur-strength: 22px;
 }
+
 body {
     background: var(--bg);
     color: #E4E7F3;
@@ -42,14 +43,36 @@ body {
     z-index: 100;
     justify-content: flex-start;
     transition: background 0.18s;
-    padding-left: 0;
 }
+
 .header-left {
     display: flex;
     align-items: center;
     gap: 13px;
     margin-left: 14px;
     height: 100%;
+}
+
+/* Hapus menu-btn & sidebar */
+.menu-btn, .back-btn, .scroll-top-btn {
+    background: none !important;
+    border: none !important;
+    color: #fff !important;
+    border-radius: 50%;
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7px;
+    margin: 0;
+    outline: none;
+    box-shadow: none;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, filter 0.15s;
+    position: relative;
+}
+.menu-btn, .back-btn {
+    display: none;
 }
 
 .header-icon {
@@ -62,14 +85,14 @@ body {
     padding: 0;
     margin-left: 2px;
     cursor: pointer;
-    transition: filter 0.18s;
+    transition: filter 0.18s, box-shadow 0.16s;
 }
 .header-icon.no-bg {
     background: none !important;
     box-shadow: none;
 }
 .header-icon:hover {
-    filter: brightness(1.25) drop-shadow(0 2px 10px #8f7aff60);
+    filter: brightness(1.25) drop-shadow(0 4px 16px #8f7aff33);
 }
 
 .header-title {
@@ -81,77 +104,8 @@ body {
     text-shadow: 0 1px 6px #111b;
 }
 
-/* SIDEBAR */
-.side-nav {
-    width: 250px;
-    background: var(--glass);
-    position: fixed;
-    top: 0;
-    left: -270px;
-    height: 100vh;
-    z-index: 300;
-    box-shadow: var(--shadow);
-    display: flex;
-    flex-direction: column;
-    backdrop-filter: blur(var(--blur-strength));
-    -webkit-backdrop-filter: blur(var(--blur-strength));
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 18px;
-    border-right: 1.5px solid #ffffff10;
-    opacity: 0.99;
-    transition: left 0.33s cubic-bezier(.4,0,.2,1), backdrop-filter .22s;
-}
-.side-nav.open { left: 0; }
-.overlay {
-    position: fixed;
-    z-index: 250;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(20,20,22,0.49);
-    display: none;
-    transition: opacity 0.2s;
-}
-.overlay.active { display: block; }
-
-.nav-content { padding: 32px 22px 18px 24px; }
-.nav-title {
-    color: #fff;
-    font-weight: 700;
-    font-size: 1.13em;
-    margin-bottom: 16px;
-    letter-spacing: 0.04em;
-}
-
-.side-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-.side-nav li { margin-bottom: 16px; }
-.side-nav a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 1.12em;
-    padding: 11px 16px;
-    border-radius: 7px;
-    display: block;
-    font-weight: 600;
-    transition: background 0.18s, color 0.18s, padding-left .18s;
-    position: relative;
-}
-.side-nav a:hover {
-    background: rgba(255,255,255,0.09);
-    color: #eee !important;
-    padding-left: 24px;
-}
-
-@media (max-width: 600px) {
-    .side-nav {
-        width: 75vw;
-        min-width: 180px;
-        max-width: 94vw;
-        left: -80vw;
-    }
-}
+/* Hapus sidebar */
+.side-nav, .overlay { display: none !important; }
 
 main {
     max-width: 540px;
@@ -206,7 +160,7 @@ main {
     animation: fadeCard .7s cubic-bezier(.4,0,.2,1);
     backdrop-filter: blur(3.5px);
     transition: border .18s, box-shadow .18s, transform .16s;
-    will-change: box-shadow, transform;
+    will-change: box-shadow, transform, opacity;
     opacity: 0.98;
 }
 #addon-list li:hover {
@@ -235,6 +189,7 @@ main {
     text-shadow: 0 2px 12px #2e365d23;
 }
 
+/* LIMIT TEXT pada deskripsi di list */
 .addon-desc {
     color: var(--grey);
     font-size: 1.07rem;
@@ -256,6 +211,7 @@ main {
     gap: 16px;
 }
 
+/* ONLY Download button is outline, no underline */
 .addon-link,
 .detail-btn {
     background: transparent;
@@ -352,6 +308,7 @@ main {
     text-shadow: 0 1px 8px #000b;
 }
 
+/* Detail Page */
 .detail-container {
     background: var(--glass);
     border: 2px solid #23243b;
@@ -402,16 +359,14 @@ main {
         padding: 8px 2vw 12px 2vw;
     }
     .main-header { border-radius: 0; }
-    .side-nav { width: 75vw; min-width: 180px; max-width: 94vw; left: -80vw; }
     #addon-list li, .detail-container {
         padding: 16px 5vw 11px 5vw;
     }
-    .header-left { margin-left: 7px; }
+    .header-left { width: 100%; }
 }
 
 @media (max-width: 430px) {
     .header-title { font-size: 1.15rem; }
     #addon-list li, .detail-container { padding: 13px 2vw 8px 2vw; }
     .addon-link, .detail-btn { font-size: 1.01rem; padding: 9px 13px; }
-    .side-nav { min-width: 0; }
 }
