@@ -1,7 +1,23 @@
+function showLoader(show = true) {
+    const loader = document.getElementById('loader');
+    if (!loader) return;
+    loader.style.display = show ? "flex" : "none";
+}
+
 function extractCoverUrl(desc) {
     const m = desc && desc.match(/!\[[^\]]*\]\((.*?)\)/);
     if (m && m[1]) return m[1];
     return null;
+}
+
+function startDownload(url, filename) {
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename || '';
+    a.style.display = 'none';
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => document.body.removeChild(a), 130);
 }
 
 function renderDetail() {
