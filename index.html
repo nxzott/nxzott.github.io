@@ -5,39 +5,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>N I Z Λ M</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-    <header class="main-header">
-        <div class="header-left">
-            <img src="image/pack_icon.png" alt="icon" class="header-icon no-bg" id="tiktok-logo">
-            <span class="header-title">N I Z Λ M</span>
+    <div class="app-container">
+        <nav class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <img src="image/pack_icon.png" alt="icon" class="sidebar-logo">
+                <span class="sidebar-title">N I Z Λ M</span>
+            </div>
+            <div class="sidebar-nav">
+                <a href="index.html" class="sidebar-link sidebar-active">Home</a>
+                <button class="sidebar-btn" id="adminSidebarBtn" onclick="window.location.href='admin.html'">Login Admin</button>
+            </div>
+        </nav>
+        <div class="main-content">
+            <header class="main-header">
+                <div class="header-left">
+                    <img src="image/pack_icon.png" alt="icon" class="header-icon" id="site-logo">
+                    <span class="header-title">N I Z Λ M</span>
+                </div>
+                <div class="header-right">
+                    <button class="sidebar-toggle-btn" onclick="toggleSidebar()">•</button>
+                </div>
+            </header>
+            <main>
+                <div class="addon-actions">
+                    <input type="text" id="search" placeholder="Cari addon...">
+                </div>
+                <ul id="addon-list"></ul>
+            </main>
+            <div class="site-credit">
+                <div class="site-credit-inner">© N I Z Λ M - 2025 All Rights Reserved.</div>
+            </div>
         </div>
-    </header>
-    <main>
-        <div class="addon-actions">
-            <input type="text" id="search" placeholder="Search">
-        </div>
-        <ul id="addon-list"></ul>
-    </main>
-    <button id="scrollTopBtn" class="scroll-top-btn" title="Scroll to top">
-        <span class="material-icons">expand_less</span>
-    </button>
-    <div id="loader" class="loader-container" style="display:none;">
-        <div class="loader-spinner"></div>
-        <div class="loader-text">Loading...</div>
     </div>
-    <div class="site-credit"><div class="site-credit-inner">© N I Z Λ M - 2025 Alright Reserved.</div></div>
+    <div id="sidebar-overlay" class="sidebar-overlay hide" onclick="toggleSidebar()"></div>
     <script src="script.js"></script>
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const tiktok = document.getElementById('tiktok-logo');
-        if (tiktok) {
-            tiktok.addEventListener('click', function() {
-                window.open('https://www.tiktok.com/@nxzovt', '_blank');
-            });
+    function toggleSidebar() {
+        const sidebar = document.getElementById("sidebar");
+        const overlay = document.getElementById("sidebar-overlay");
+        sidebar.classList.toggle("active");
+        if (sidebar.classList.contains("active")) {
+            overlay.classList.remove("hide");
+        } else {
+            overlay.classList.add("hide");
         }
-    });
+    }
     </script>
 </body>
 </html>
