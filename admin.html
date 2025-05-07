@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - N I Z Λ M Addon Collection</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <nav class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <img src="image/pack_icon.png" alt="icon" class="sidebar-logo">
+                <span class="sidebar-title">N I Z Λ M Addon</span>
+            </div>
+            <div class="sidebar-nav">
+                <a href="index.html" class="sidebar-link">Home</a>
+                <button class="sidebar-btn" id="adminSidebarBtn" onclick="logoutSidebarAction()">Logout</button>
+            </div>
+        </nav>
+        <div class="main-content">
+            <header class="main-header">
+                <div class="header-left">
+                    <img src="image/pack_icon.png" alt="icon" class="header-icon" id="site-logo">
+                    <span class="header-title">Admin Panel</span>
+                </div>
+                <div class="header-right">
+                    <button class="sidebar-toggle-btn" onclick="toggleSidebar()">☰</button>
+                </div>
+            </header>
+            <main>
+                <section id="admin-login-section">
+                    <h2>Admin Login</h2>
+                    <form id="admin-login-form">
+                        <input type="text" id="admin-username" placeholder="Username" required>
+                        <input type="password" id="admin-password" placeholder="Password" required>
+                        <button type="submit">Login</button>
+                    </form>
+                    <div id="login-error" style="color:#8f7aff;margin-top:10px;display:none;"></div>
+                </section>
+                <section id="admin-main-section" style="display:none;">
+                    <h2>Tambah Addon Baru</h2>
+                    <form id="addon-form">
+                        <input type="text" id="addon-name" placeholder="Nama addon" required>
+                        <input type="text" id="addon-url" placeholder="Link download" required>
+                        <textarea id="addon-desc" placeholder="Deskripsi singkat"></textarea>
+                        <button type="submit">Tambah</button>
+                    </form>
+                    <h2>Daftar Addon (Edit/Hapus)</h2>
+                    <ul id="admin-addon-list"></ul>
+                    <button id="logout-btn" style="margin-top:14px;background:#181825;color:#fff;border:1px solid #8f7aff;border-radius:8px;padding:8px 22px;">Logout</button>
+                </section>
+            </main>
+            <div class="site-credit">
+                <div class="site-credit-inner">© N I Z Λ M - 2025 All Rights Reserved.</div>
+            </div>
+        </div>
+    </div>
+    <div id="sidebar-overlay" class="sidebar-overlay hide" onclick="toggleSidebar()"></div>
+    <script src="admin.js"></script>
+    <script>
+    function toggleSidebar() {
+        const sidebar = document.getElementById("sidebar");
+        const overlay = document.getElementById("sidebar-overlay");
+        sidebar.classList.toggle("active");
+        if (sidebar.classList.contains("active")) {
+            overlay.classList.remove("hide");
+        } else {
+            overlay.classList.add("hide");
+        }
+    }
+    function logoutSidebarAction() {
+        if (typeof setAdminLogin === "function") {
+            setAdminLogin(false);
+            window.location.href = "index.html";
+        } else {
+            window.location.href = "index.html";
+        }
+    }
+    document.getElementById("adminSidebarBtn").onclick = logoutSidebarAction;
+    </script>
+</body>
+</html>
