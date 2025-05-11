@@ -45,7 +45,7 @@ body {
     border-radius: 50%;
     background: var(--accent-dark);
     box-shadow: var(--shadow);
-    margin-bottom: 6px;
+    margin-bottom: none;
     animation: popIn 0.85s;
 }
 @keyframes popIn {
