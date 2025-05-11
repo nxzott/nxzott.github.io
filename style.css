@@ -11,6 +11,10 @@
     --avatar-outline: 2px;
     --brand-font: 'JetBrains Mono', monospace;
     --main-font: 'Outfit', Arial, sans-serif;
+    --glitch-pink: #ffb6ea;
+    --glitch-blue: #8ae6ff;
+    --glitch-black: #181028;
+    --glitch-bold: 'Archivo Black', 'JetBrains Mono', monospace;
 }
 
 body {
@@ -67,7 +71,7 @@ body {
     margin-bottom: 3px;
     text-shadow: 0 3px 12px #000a;
     color: var(--accent);
-    font-family: var(--brand-font), var(--main-font);
+    font-family: var(--glitch-bold), var(--brand-font), var(--main-font);
     display: flex; align-items: center; gap: 10px;
 }
 .profile-bio {
@@ -136,4 +140,75 @@ body, html {
 }
 body::-webkit-scrollbar, html::-webkit-scrollbar {
     display: none;
+}
+
+.glitch {
+  position: relative;
+  color: var(--accent);
+  font-family: var(--glitch-bold), var(--brand-font), var(--main-font);
+  letter-spacing: 0.1em;
+  animation: glitch-skew 2s infinite linear alternate-reverse;
+  overflow: visible;
+}
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0; top: 0;
+  width: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: -1;
+}
+.glitch::before {
+  color: var(--glitch-pink);
+  text-shadow: 2px 0 var(--glitch-pink);
+  animation: glitch-anim-pink 1.8s infinite linear alternate-reverse;
+}
+.glitch::after {
+  color: var(--glitch-blue);
+  text-shadow: -2px 0 var(--glitch-blue), 0 2px var(--glitch-black);
+  animation: glitch-anim-blue 2s infinite linear alternate-reverse;
+  opacity: .8;
+}
+@keyframes glitch-anim-pink {
+  0% { clip-path: inset(0 0 85% 0); transform: translate(-1px, -1px);}
+  10% { clip-path: inset(0 0 50% 0);}
+  20% { clip-path: inset(0 0 20% 0); transform: translate(2px, 1px);}
+  30% { clip-path: inset(0 0 60% 0);}
+  40% { clip-path: inset(0 0 30% 0); transform: translate(-3px, 2px);}
+  50% { clip-path: inset(0 0 40% 0);}
+  60% { clip-path: inset(0 0 10% 0); transform: translate(3px, -2px);}
+  70% { clip-path: inset(0 0 70% 0);}
+  80% { clip-path: inset(0 0 0 0); transform: translate(-2px, 1px);}
+  100% { clip-path: inset(0 0 85% 0); transform: translate(0);}
+}
+@keyframes glitch-anim-blue {
+  0% { clip-path: inset(85% 0 0 0); transform: translate(2px, 1px);}
+  10% { clip-path: inset(50% 0 0 0);}
+  20% { clip-path: inset(20% 0 0 0); transform: translate(-2px, -1px);}
+  30% { clip-path: inset(60% 0 0 0);}
+  40% { clip-path: inset(30% 0 0 0); transform: translate(3px, 2px);}
+  50% { clip-path: inset(40% 0 0 0);}
+  60% { clip-path: inset(10% 0 0 0); transform: translate(-3px, -2px);}
+  70% { clip-path: inset(70% 0 0 0);}
+  80% { clip-path: inset(0 0 0 0); transform: translate(2px, -1px);}
+  100% { clip-path: inset(85% 0 0 0); transform: translate(0);}
+}
+@keyframes glitch-skew {
+  0% { transform: skew(0deg);}
+  10% { transform: skew(-1deg);}
+  20% { transform: skew(2deg);}
+  30% { transform: skew(-1deg);}
+  40% { transform: skew(1deg);}
+  50% { transform: skew(0deg);}
+  100% { transform: skew(0deg);}
+}
+.bio-fade {
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(.4,1.6,.2,1);
+}
+.bio-show {
+  opacity: 1;
+  transition: opacity 0.5s cubic-bezier(.4,1.6,.2,1);
 }
