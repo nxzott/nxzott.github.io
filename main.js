@@ -49,13 +49,3 @@ document.querySelectorAll('.links-section .link-btn').forEach(function(link) {
     link.style.webkitTapHighlightColor = 'transparent';
     link.style.outline = 'none';
 });
-
-window.addEventListener('DOMContentLoaded', function() {
-    setTimeout(function() {
-        document.getElementById('loader').style.opacity = '0';
-        setTimeout(function() {
-            document.getElementById('loader').style.display = 'none';
-            document.querySelector('.container').style.opacity = 1;
-        }, 350);
-    }, 800);
-});
