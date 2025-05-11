@@ -49,3 +49,31 @@ document.querySelectorAll('.links-section .link-btn').forEach(function(link) {
     link.style.webkitTapHighlightColor = 'transparent';
     link.style.outline = 'none';
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+  var glitchElem = document.querySelector('.glitch');
+  if (glitchElem) {
+    glitchElem.setAttribute('data-text', glitchElem.textContent);
+  }
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+  var bioElem = document.getElementById('profile-bio');
+  var texts = [
+    "Welcome to my link bio! 👾",
+    "Download all my addons on discord! 👾"
+  ];
+  var idx = 0;
+  function switchBio() {
+    bioElem.classList.remove('bio-show');
+    bioElem.classList.add('bio-fade');
+    setTimeout(function() {
+      idx = 1 - idx;
+      bioElem.textContent = texts[idx];
+      bioElem.classList.remove('bio-fade');
+      bioElem.classList.add('bio-show');
+    }, 400);
+  }
+  bioElem.classList.add('bio-show');
+  setInterval(switchBio, 2000);
+});
