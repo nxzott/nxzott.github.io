@@ -8,11 +8,9 @@
     <link rel="icon" href="image/pack_icon.png">
 </head>
 <body>
-    <div class="bg-image"></div>
-    <div class="bg-blur-overlay"></div>
     <main class="container">
         <section class="profile-section">
-            <img src="image/pack_icon.png" alt="Profile" class="profile-img">
+            <img src="image/profile.png" alt="Profile" class="profile-img">
             <h1 class="profile-name">nxzott</h1>
             <p class="profile-bio">Welcome to my link bio! 👾</p>
         </section>
@@ -28,5 +26,28 @@
             © 2025 nxzott. Made with Github.
         </footer>
     </main>
+    <script>
+    document.querySelectorAll('.links-section .link-btn').forEach(function(link) {
+        link.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+        link.addEventListener('copy', function(e) {
+            e.preventDefault();
+        });
+        link.addEventListener('cut', function(e) {
+            e.preventDefault();
+        });
+        link.addEventListener('touchstart', function(e) {
+            link.longPressTimer = setTimeout(function() {
+                e.preventDefault();
+            }, 400);
+        });
+        link.addEventListener('touchend', function() {
+            clearTimeout(link.longPressTimer);
+        });
+        link.style.userSelect = 'none';
+        link.setAttribute('unselectable', 'on');
+    });
+    </script>
 </body>
 </html>
