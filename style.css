@@ -41,8 +41,9 @@ body {
 }
 .profile-img-wrapper {
     display: inline-block;
-    padding: none;
+    padding: 4px;
     border-radius: 50%;
+    border: 2px solid var(--accent-dark);
     background: var(--accent-dark);
     box-shadow: var(--shadow);
     margin-bottom: none;
