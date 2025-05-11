@@ -3,55 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>N I Z Λ M</title>
+    <title>nxzott | Link Bio</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="image/pack_icon.png">
 </head>
 <body>
-    <div class="app-container">
-        <nav class="sidebar" id="sidebar">
-            <div class="sidebar-header">
-                <img src="image/pack_icon.png" alt="icon" class="sidebar-logo">
-                <span class="sidebar-title">N I Z Λ M</span>
-            </div>
-            <div class="sidebar-nav">
-                <a href="index.html" class="sidebar-link sidebar-active">Home</a>
-                <button class="sidebar-btn" id="adminSidebarBtn" onclick="window.location.href='admin.html'">Login Admin</button>
-            </div>
-        </nav>
-        <div class="main-content">
-            <header class="main-header">
-                <div class="header-left">
-                    <img src="image/pack_icon.png" alt="icon" class="header-icon" id="site-logo">
-                    <span class="header-title">N I Z Λ M</span>
-                </div>
-                <div class="header-right">
-                    <button class="sidebar-toggle-btn" onclick="toggleSidebar()">•</button>
-                </div>
-            </header>
-            <main>
-                <div class="addon-actions">
-                    <input type="text" id="search" placeholder="Cari addon...">
-                </div>
-                <ul id="addon-list"></ul>
-            </main>
-            <div class="site-credit">
-                <div class="site-credit-inner">© N I Z Λ M - 2025 All Rights Reserved.</div>
-            </div>
-        </div>
-    </div>
-    <div id="sidebar-overlay" class="sidebar-overlay hide" onclick="toggleSidebar()"></div>
-    <script src="script.js"></script>
-    <script>
-    function toggleSidebar() {
-        const sidebar = document.getElementById("sidebar");
-        const overlay = document.getElementById("sidebar-overlay");
-        sidebar.classList.toggle("active");
-        if (sidebar.classList.contains("active")) {
-            overlay.classList.remove("hide");
-        } else {
-            overlay.classList.add("hide");
-        }
-    }
-    </script>
+    <div class="bg-image"></div>
+    <div class="bg-blur-overlay"></div>
+    <main class="container">
+        <section class="profile-section">
+            <img src="image/pack_icon.png" alt="Profile" class="profile-img">
+            <h1 class="profile-name">nxzott</h1>
+            <p class="profile-bio">Welcome to my link bio! 👾</p>
+        </section>
+        <section class="links-section">
+            <a href="https://discord.com/invite/TuNkHNmmVC" class="link-btn" target="_blank" rel="noopener">Discord</a>
+            <a href="https://www.youtube.com/@nxzott" class="link-btn" target="_blank" rel="noopener">YouTube</a>
+            <a href="https://www.instagram.com/nxzott" class="link-btn" target="_blank" rel="noopener">Instagram</a>
+            <a href="https://www.tiktok.com/@nxzott" class="link-btn" target="_blank" rel="noopener">TikTok</a>
+            <a href="https://ko-fi.com/nxzott" class="link-btn" target="_blank" rel="noopener">Ko-fi</a>
+            <a href="https://github.com/nxzott" class="link-btn" target="_blank" rel="noopener">GitHub</a>
+        </section>
+        <footer class="footer">
+            © 2025 nxzott. Made with Github.
+        </footer>
+    </main>
 </body>
 </html>
