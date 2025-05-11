@@ -51,13 +51,6 @@ document.querySelectorAll('.links-section .link-btn').forEach(function(link) {
 });
 
 document.addEventListener("DOMContentLoaded", function() {
-  var glitchElem = document.querySelector('.glitch');
-  if (glitchElem) {
-    glitchElem.setAttribute('data-text', glitchElem.textContent);
-  }
-});
-
-document.addEventListener("DOMContentLoaded", function() {
   var bioElem = document.getElementById('profile-bio');
   var texts = [
     "Welcome to my link bio! 👾",
