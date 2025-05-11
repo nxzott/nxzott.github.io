@@ -4,15 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>nxzott | Link Bio</title>
+    <meta name="description" content="All nxzott social links in one place. Discord, Instagram, YouTube, Ko-fi, TikTok, GitHub - connect with me everywhere!">
+    <meta property="og:title" content="nxzott | Link Bio">
+    <meta property="og:description" content="All nxzott social links in one place. Discord, Instagram, YouTube, Ko-fi, TikTok, GitHub - connect with me everywhere!">
+    <meta property="og:image" content="image/pack_icon.png">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://nxzott.github.io/addon/">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="image/pack_icon.png">
+    <meta name="twitter:title" content="nxzott | Link Bio">
+    <meta name="twitter:description" content="All nxzott social links in one place. Discord, Instagram, YouTube, Ko-fi, TikTok, GitHub - connect with me everywhere!">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@700&family=Outfit:wght@500;700&display=swap">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="image/pack_icon.png">
 </head>
 <body>
-    <main class="container">
+    <div id="loader">
+        <div class="loader-icon"></div>
+    </div>
+    <main class="container" style="opacity:0;">
         <section class="profile-section">
-            <img src="image/profile.png" alt="Profile" class="profile-img">
-            <h1 class="profile-name">nxzott</h1>
-            <p class="profile-bio">Welcome to my link bio! 👾</p>
+            <span class="profile-img-wrapper">
+                <img src="image/pack_icon.png" alt="Profile" class="profile-img">
+            </span>
+            <h1 class="profile-name">nxzott <span class="badge">Official</span></h1>
+            <p class="profile-bio">Welcome to my link bio! 👾<br><span class="status-badge online">Online</span></p>
         </section>
         <section class="links-section">
             <a href="https://discord.com/invite/TuNkHNmmVC" class="link-btn" target="_blank" rel="noopener">Discord</a>
@@ -22,32 +38,14 @@
             <a href="https://ko-fi.com/nxzott" class="link-btn" target="_blank" rel="noopener">Ko-fi</a>
             <a href="https://github.com/nxzott" class="link-btn" target="_blank" rel="noopener">GitHub</a>
         </section>
+        <section class="privacy-section">
+            <a href="privacy.html" class="privacy-link">Privacy Policy</a>
+        </section>
         <footer class="footer">
-            © 2025 nxzott. Made with Github.
+            <span class="branding">nxzott | N I Z Λ M</span><br>
+            © 2025 nxzott. Made with <span style="color:#b79fff;">❤</span> & GitHub.
         </footer>
     </main>
-    <script>
-    document.querySelectorAll('.links-section .link-btn').forEach(function(link) {
-        link.addEventListener('contextmenu', function(e) {
-            e.preventDefault();
-        });
-        link.addEventListener('copy', function(e) {
-            e.preventDefault();
-        });
-        link.addEventListener('cut', function(e) {
-            e.preventDefault();
-        });
-        link.addEventListener('touchstart', function(e) {
-            link.longPressTimer = setTimeout(function() {
-                e.preventDefault();
-            }, 400);
-        });
-        link.addEventListener('touchend', function() {
-            clearTimeout(link.longPressTimer);
-        });
-        link.style.userSelect = 'none';
-        link.setAttribute('unselectable', 'on');
-    });
-    </script>
+    <script src="main.js"></script>
 </body>
 </html>
