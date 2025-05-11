@@ -9,7 +9,6 @@
     --border-active: #e0d7ff;
     --shadow: 0 2px 16px #000a;
     --avatar-outline: 4px;
-    --avatar-gap: 7px;
     --brand-font: 'JetBrains Mono', monospace;
     --main-font: 'Outfit', Arial, sans-serif;
 }
@@ -42,7 +41,7 @@ body {
 }
 .profile-img-wrapper {
     display: inline-block;
-    padding: var(--avatar-gap);
+    padding: none;
     border-radius: 50%;
     background: var(--accent-dark);
     box-shadow: var(--shadow);
