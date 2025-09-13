@@ -53,8 +53,8 @@ document.querySelectorAll('.links-section .link-btn').forEach(function(link) {
 document.addEventListener("DOMContentLoaded", function() {
   var bioElem = document.getElementById('profile-bio');
   var texts = [
-    "Welcome to my link bio! 👾",
-    "Download all my addons on discord! 👾"
+    "Hi there im making addons",
+    "Download all my addons on discord"
   ];
   var idx = 0;
   function switchBio() {
