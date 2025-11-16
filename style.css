@@ -1,12 +1,12 @@
 :root {
-    --bg-main: #0a0512;
-    --bg-card: #181028;
-    --accent: #f6f0ff;
-    --accent-dark: #c9b7ff;
+    --bg-main: #041025;
+    --bg-card: #081428;
+    --accent: #D0E7FE;
+    --accent-dark: #A6B8CB;
     --text-main: #f7f6fa;
-    --text-sub: #c5b6e7;
-    --border: #4a4a5a;
-    --border-active: #e0d7ff;
+    --text-sub: #c5d8ee;
+    --border: #2f3742;
+    --border-active: #E8F6FF;
     --shadow: 0 2px 16px #000a;
     --avatar-outline: 2px;
     --brand-font: 'JetBrains Mono', monospace;
@@ -44,7 +44,7 @@ body {
     padding: 4px;
     border-radius: 50%;
     border: 2px solid var(--accent-dark);
-    background: var(--bg-main);
+    background: var(--bg-card);
     box-shadow: var(--shadow);
     animation: popIn 0.85s;
 }
@@ -56,7 +56,7 @@ body {
 .profile-img {
     width: 104px; height: 104px;
     border-radius: 50%; object-fit: cover;
-    background: #181028;
+    background: var(--bg-card);
     user-select: none; pointer-events: none;
     display: block;
 }
@@ -74,6 +74,8 @@ body {
     font-size: 1.03rem; color: var(--text-sub); margin-bottom: 6px;
     text-align: center; max-width: 320px; opacity: .93;
 }
+
+/* typing styles */
 .profile-bio .typing-text {
     display: inline;
     white-space: nowrap;
@@ -127,7 +129,7 @@ body {
     border: 2.2px solid var(--border-active);
     outline: none;
     transform: scale(1.043);
-    box-shadow: 0 4px 22px #b79fff44;
+    box-shadow: 0 4px 22px rgba(208,231,254,0.27);
 }
 .link-btn:focus {
     box-shadow: none;
