@@ -57,13 +57,12 @@ document.addEventListener("DOMContentLoaded", function() {
     "Download all my addons on discord"
   ];
 
-  // build structure: <p id="profile-bio"><span class="typing-text"></span><span class="typing-cursor"></span></p>
   bioElem.innerHTML = '<span class="typing-text"></span><span class="typing-cursor" aria-hidden="true"></span>';
   var textSpan = bioElem.querySelector('.typing-text');
-  var typingSpeed = 60;      // ms per char when typing
-  var deletingSpeed = 30;    // ms per char when deleting
-  var pauseAfterTyping = 1400;   // ms to wait after a full string typed
-  var pauseAfterDeleting = 300;  // ms to wait after deleting finished
+  var typingSpeed = 60;
+  var deletingSpeed = 30;
+  var pauseAfterTyping = 1400;
+  var pauseAfterDeleting = 300;
 
   var textIndex = 0;
   var charIndex = 0;
@@ -72,22 +71,18 @@ document.addEventListener("DOMContentLoaded", function() {
   function loop() {
     var currentText = texts[textIndex];
     if (!isDeleting) {
-      // typing
       charIndex++;
       textSpan.textContent = currentText.slice(0, charIndex);
       if (charIndex === currentText.length) {
-        // finished typing
         isDeleting = true;
         setTimeout(loop, pauseAfterTyping);
       } else {
         setTimeout(loop, typingSpeed);
       }
     } else {
-      // deleting
       charIndex--;
       textSpan.textContent = currentText.slice(0, charIndex);
       if (charIndex === 0) {
-        // finished deleting, move to next text
         isDeleting = false;
         textIndex = (textIndex + 1) % texts.length;
         setTimeout(loop, pauseAfterDeleting);
@@ -97,6 +92,5 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
 
-  // start
   setTimeout(loop, 300);
 });
