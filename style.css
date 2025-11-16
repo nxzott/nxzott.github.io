@@ -74,6 +74,23 @@ body {
     font-size: 1.03rem; color: var(--text-sub); margin-bottom: 6px;
     text-align: center; max-width: 320px; opacity: .93;
 }
+.profile-bio .typing-text {
+    display: inline;
+    white-space: nowrap;
+}
+.profile-bio .typing-cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1.05em;
+    margin-left: 8px;
+    background: var(--accent);
+    vertical-align: bottom;
+    animation: blink 1s steps(2, start) infinite;
+}
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
 .links-section {
     display: flex; flex-direction: column;
     width: 100%; max-width: 320px;
