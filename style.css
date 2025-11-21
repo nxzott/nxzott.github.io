@@ -1,13 +1,13 @@
 :root {
-    --bg-main: #000000;
-    --bg-card: #02111a;
+    --bg-main: #0A0A0C;
+    --bg-card: #111215;
     --accent: #D0E7FE;
     --accent-dark: #A6B8CB;
-    --text-main: #F7F6FA;
-    --text-sub: #9FBFDC;
-    --border: #0B2130;
+    --text-main: #EDF2F7;
+    --text-sub: #9AAFC2;
+    --border: #1A1D20;
     --border-active: #E8F6FF;
-    --shadow: 0 2px 16px #000A;
+    --shadow: 0 2px 16px #0008;
     --avatar-outline: 2px;
     --brand-font: 'JetBrains Mono', monospace;
     --main-font: 'Outfit', Arial, sans-serif;
