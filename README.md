@@ -1,2 +1,1 @@
-# 𝖓.
-nigga wyd
+# Nizam, As Always.
