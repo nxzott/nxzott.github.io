@@ -1,0 +1,76 @@
+document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+        return false;
+    });
+
+    document.addEventListener('copy', function(e) {
+        e.preventDefault();
+        return false;
+    });
+
+    document.addEventListener('cut', function(e) {
+        e.preventDefault();
+        return false;
+    });
+
+    document.querySelectorAll('.link-item, .social-link').forEach(function(link) {
+        link.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+        });
+        
+        link.addEventListener('copy', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+        });
+        
+        link.addEventListener('cut', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+        });
+        
+        link.addEventListener('mousedown', function(e) {
+            if (e.button === 2) {
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            }
+        });
+        
+        link.addEventListener('selectstart', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+        });
+        
+        link.addEventListener('dragstart', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+        });
+        
+        link.addEventListener('touchstart', function(e) {
+            link.longPressTimer = setTimeout(function() {
+                e.preventDefault();
+                e.stopPropagation();
+            }, 350);
+        });
+        
+        link.addEventListener('touchend', function(e) {
+            clearTimeout(link.longPressTimer);
+        });
+        
+        link.tabIndex = -1;
+        link.setAttribute('unselectable', 'on');
+        link.style.userSelect = 'none';
+        link.style.webkitUserSelect = 'none';
+        link.style.MozUserSelect = 'none';
+        link.style.msUserSelect = 'none';
+        link.style.webkitTapHighlightColor = 'transparent';
+        link.style.outline = 'none';
+    });
+});
